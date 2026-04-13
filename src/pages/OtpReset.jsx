@@ -51,11 +51,11 @@ export default function OtpReset() {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/auth/reset-password", {
-        email,
-        otp: finalOtp,
-        newPassword: password,
-      });
+     await axios.post(`${import.meta.env.VITE_API_URL}/auth/reset-password`, {
+  email,
+  otp,
+  newPassword,
+});
 
       alert("Password reset successful 🎉");
       navigate("/login");
@@ -69,10 +69,7 @@ export default function OtpReset() {
   /* ================= RESEND OTP ================= */
   const resendOtp = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/forgot-password", {
-        email,
-      });
-
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/send-otp`, { email });
       setTimer(30);
       setOtpArray(["", "", "", "", "", ""]);
 
